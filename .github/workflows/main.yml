@@ -10,21 +10,21 @@ jobs:
 
       - name: Setup Theos and SDK
         run: |
-          # تحميل أدوات البرمجة والمكتبات الناقصة
+          # تحميل أداة البرمجة والمكتبات اللازمة
           git clone --recursive https://github.com/theos/theos.git ~/theos
           curl -LO https://github.com/theos/sdks/raw/master/iPhoneOS14.5.sdk.tar.xz
+          mkdir -p ~/theos/sdks
           tar -xvf iPhoneOS14.5.sdk.tar.xz -C ~/theos/sdks
-          rm iPhoneOS14.5.sdk.tar.xz
           
-      - name: Build Tweak
+      - name: Build Package
         run: |
           export THEOS=~/theos
           export PATH=$THEOS/bin:$PATH
-          # تجميع مشروع طلال 515
+          # تجميع تطبيق طلال 515
           make package FINALPACKAGE=1
           
-      - name: Upload App
+      - name: Upload Result
         uses: actions/upload-artifact@v3
         with:
-          name: Talal-Falcon-App
+          name: Talal-Falcon-IPA
           path: packages/*.deb
