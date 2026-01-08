@@ -1,0 +1,26 @@
+name: Build Talal Falcon
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Theos
+        run: |
+          export THEOS=~/theos
+          git clone --recursive https://github.com/theos/theos.git $THEOS
+          
+      - name: Build Tweak
+        run: |
+          export THEOS=~/theos
+          # هذا الأمر يحول كودك 515 إلى ملف جاهز
+          make package FINALPACKAGE=1
+          
+      - name: Upload Result
+        uses: actions/upload-artifact@v3
+        with:
+          name: Talal-Falcon-App
+          path: packages/*.deb
