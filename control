@@ -1,0 +1,8 @@
+Package: com.talal.falcon
+Name: Talal Falcon 515
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: نسخة سناب شات محمية بكود 515 - تطوير طلال
+Author: Talal
+Section: Tweaks
